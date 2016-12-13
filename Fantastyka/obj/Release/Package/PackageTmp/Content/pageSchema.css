@@ -1,0 +1,68 @@
+﻿body {
+    font-family: 'Cormorant Garamond', serif;
+    background-color: #d5d5d5;
+    /*background-image: url(../Images/green.jpg);*/
+    background-position: top right, 100% center;
+    background-origin: content-box;
+    background-repeat:  repeat;
+    background-color: none;
+}
+
+div#conteiner{
+    margin-left:10%;
+    margin-right: 10%;
+    min-width: 800px;
+}
+
+div#header, footer#footer {
+    padding: 10px;
+    color: white;
+    background-color: #473C8B;
+    text-align: center;
+}
+
+div#content {
+    margin: 5px;
+    padding: 10px;
+    background-color: lightgrey;
+    
+}
+
+div.article {
+    margin: 5px;
+    padding: 10px;
+    background-color: white;
+}
+
+div#menu {
+    background-color: #CAE1FF;
+    font-size: 18px;
+    margin: 5px;
+    text-align: center;
+    background-color: #f9f9f9;
+}
+
+nav#menu a {
+    display: inline;
+    margin: 5px;
+}
+
+p.contetn {
+    text-indent: 10mm;
+}
+
+.books {
+    height: 150px;
+    width: 100px;
+}
+
+
+table {
+    width:100%; 
+    border: 1px solid black; 
+    margin-bottom: 5px
+}
+
+th, td {
+    border: 1px solid black
+}

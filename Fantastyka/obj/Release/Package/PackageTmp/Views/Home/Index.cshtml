@@ -1,0 +1,49 @@
+﻿@{
+    ViewBag.Title = "Index";
+    @Styles.Render("~/Content/pageSchema.css")
+}
+<body>
+    <div id= "conteiner">
+        <div id="header">
+            <h1>Literatura Fantasy</h1>
+        </div>
+
+        <div id="menu">
+
+        </div>
+
+
+
+        <div class="article">
+
+            <h2 id="tittle"><i id="i1">W</i>itaj w świecie <mark id="mark1">fantasy</mark></h2>
+
+            <div>
+                <h2>Cytaty na dziś</h2>
+                <p>Jeśli chce się no­sić głowę w chmu­rach, trze­ba obiema no­gami stąpać po ziemi. - <i>Terry Pratchet</i></p>
+                <p>Jeśli wyrwiemy komuś język, nie dowiedziemy, że kłamie, a tylko obwieścimy całemu światu, iż boimy się tego, co ma do powiedzenia.-<i>George R.R. Martin</i></p>
+                <p id = "pImage">Nie jest nam dane decydowac w jakich czasach przyszlo nam zyc , ale mozemy decydowac co zrobimy z czasem jaki zostal nam dany.-<i>J.R.R. Tolkien</i></p>
+            </div>
+
+            <div class="aside">
+                <img alt="" src="~/Images/drizzt.jpg" width="280" id="photo"/>
+            </div>
+
+
+
+            <form method='POST'><p id='txtorder'  >Wybierz styl: </p>
+                <select name='layoutColor' id='layoutColor'>
+                    <option value="lightBlue">blue</option>
+                    <option value="lime">green</option>
+                    <option value="gold">gold</option>
+                    <option value="silver">silver</option>
+                    <option value="default"> >default</option>
+                </select>
+                <input type='submit' value='Zmien wyglad'/>
+            </form>
+
+        </div>
+    </div>
+</body>
+
+</html>
