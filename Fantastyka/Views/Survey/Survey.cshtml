@@ -1,69 +1,119 @@
-﻿@{
+﻿@using System.Text
+@model Fantastyka.Models.SurveyModel
+
+
+@{
     ViewBag.Title = "Contact";
     @Styles.Render("~/Content/ankieta.css")
     @Styles.Render("~/Content/pageSchema.css")
 }
 
 <body>
-    <div id="conteiner">
-        <div id="header">
-            <h1>Ulubiona książka</h1>
-        </div>
-
-        <div class="article">
-
-            <h2>Pochwal się swoją ulubioną książką.	</h2>
-            <p>Dodaj książkę.</p>
-
-            <form id="myForm" method="POST" autocomplete="on">
-                <p>
-                    <label class="fixed" for="imie">Imię: </label><input type="text" name="imie" placeholder="Imie" size="25" />
-
-                    <label class="fixed" for="email">Email: </label><input type="email" name="email" placeholder="nazwa@domena.pl" size="40" />
-
-                    <br>
-                    <h3>Dodaj książkę</h3>
-
-                <p><label class="fixed" for="autor">Autor: </label><input type="text" name="autor" placeholder="Imie i nazwisko autora" size="30"></p>
-
-                <p><label for="tytulKsiazki">Tytuł książki: <br></label><textarea id="tytulKsiazki" name="tytulKsiazki" placeholder="Wpisz tytuł ksiązki" maxlength="200"></textarea></p>
-
-                <p><label class="fixed" for="wydawca">Wydawca: </label><input type="text" name="wydawca" placeholder="Wpisz wydawce" size="20"></p>
-
-
-                <label class="fixed" for="ocenaK"><strong>Jak oceniasz książkę: </strong></label>
-                <label for="ocenaK">5.0:</label><input id="ocenaK" type="radio" name="ocena" value="5.0" />
-                <label>4.0:</label><input type="radio" name="ocena" value="4.0" />
-                <label>3.0:</label><input type="radio" name="ocena" value="3.0" />
-                <label>2.0:</label><input type="radio" name="ocena" value="2.0" />
-                <label>1.0:</label><input type="radio" name="ocena" value="1.0" />
-
-                <p><label><strong>Czy przeczytałeś/aś tą książkę?</strong></label></p>
-                <select name="czyCzytales">
-                    <option selected>Tak</option>
-                    <option>Nie</option>
-                </select>
-                <p>
-                    <label>
-                        <strong>Ile razy przeczytałeś/aś tą książkę?</strong>
-                        <input type="number" name="ileRazyPrzeczyt" min="0" max="20" step="1" value="1" />
-                    </label>
-                </p>
-
-
-
-                <p>
-                    <input id="submit" type="submit" value="Wyślij">
-                    <input id="reset" type="reset" value="Wyczyść formularz">
-                </p>
-                </p>
-            </form>
-
-
-            <p id="pomoc"></p>
-            <p><meter value="1" min="0" max="3"></meter>Ankieta 1/3</p>
-            <p id="demo"></p>
-
-        </div>
+<div id="conteiner">
+    <div id="header">
+        <h1>Ulubiona książka</h1>
     </div>
+
+    <div class="article">
+
+        <h2>Pochwal się swoją ulubioną książką. </h2>
+        <h3>Dodaj książkę</h3>
+
+        @using (Html.BeginForm("Survey", "Survey"))
+        {
+            <div>
+                @Html.Label("Imię")
+                @Html.TextBoxFor(x => x.Name)
+                @Html.ValidationMessageFor(x => x.Name,"", new { @style = "color:red" })
+            </div>
+            <div>
+                @Html.Label("E-Mail")
+                @Html.TextBoxFor(x => x.Email)
+                @Html.ValidationMessageFor(x => x.Email , "", new { @style = "color:red" })
+            </div>
+
+            <div>
+                @Html.Label("Autor")
+                @Html.TextBoxFor(x => x.Author)
+                @Html.ValidationMessageFor(x => x.Author, "", new { @style = "color:red" })
+            </div>
+
+            <div>
+                @Html.Label("Tytył książki")
+                @Html.TextBoxFor(x => x.Title)
+                @Html.ValidationMessageFor(x => x.Title, "", new { @style = "color:red" })
+            </div>
+
+            <div>
+                @Html.Label("Wydawca")
+                @Html.TextBoxFor(x => x.Publisher)
+                @Html.ValidationMessageFor(x => x.Publisher, "", new { @style = "color:red" })
+            </div>
+
+            <label class="fixed" for="ocenaK">
+                <strong>Jak oceniasz książkę: </strong>
+            </label>
+            @Html.Label("1.0", "1.0")
+            @Html.RadioButtonFor(x => x.Rating, 1.0)
+            @Html.Label("2.0", "2.0")
+            @Html.RadioButtonFor(x => x.Rating, 2.0)
+            @Html.Label("3.0", "3.0")
+            @Html.RadioButtonFor(x => x.Rating, 3.0)
+            @Html.Label("4.0", "4.0")
+            @Html.RadioButtonFor(x => x.Rating, 4.0)
+            @Html.Label("5.0", "5.0")
+            @Html.RadioButtonFor(x => x.Rating, 5.0)
+            @Html.ValidationMessageFor(x => x.Rating, "", new { @style = "color:red" })
+
+            <p>
+                <label>
+                    <strong>Czy przeczytałeś/aś tą książkę?</strong>
+                </label>
+            </p>
+            @Html.EnumDropDownListFor(x => x.Readed)
+            @Html.ValidationMessageFor(x => x.Readed , "", new { @style = "color:red" })
+
+            <div>
+                @Html.Label("Ile razy przeczytałeś/aś tą książkę?")
+                @Html.TextBoxFor(x => x.TimesReaded)
+                @Html.ValidationMessageFor(x => x.TimesReaded, "", new { @style = "color:red" })
+            </div>
+
+            <div>
+                @Html.Label("Data zakupu")
+                @Html.TextBoxFor(x => x.PurchaseDate, new { @class = "datefield", type = "date" })
+                @Html.ValidationMessageFor(x => x.PurchaseDate, "", new { @style = "color:red" })
+            </div>
+
+            <div>
+                @Html.Label("Data przeczytania")
+                @Html.TextBoxFor(x => x.ReadedDate, new { @class = "datefield", type = "date" })
+                @Html.ValidationMessageFor(x => x.ReadedDate, "", new { @style = "color:red" })
+            </div>
+
+            <p>
+                <input id="submit" type="submit" value="Wyślij" action="POST">
+                <input id="reset" type="button" value="Wyczyść formularz" onclick="location.href='@Url.Action("Survey", "Survey")'" />
+    
+            </p>
+            @Html.HiddenFor(x=> x.Hidden)
+            if (!Model.Hidden)
+            {
+                
+                <div>
+                    @Html.ValueFor(x=> x.Result)
+                </div>
+            }
+        }
+               
+
+
+        <p id="pomoc"></p>
+        <p>
+            <meter value="1" min="0" max="3"></meter>Ankieta 1/3
+        </p>
+        <p id="demo"></p>
+
+    </div>
+</div>
 </body>
