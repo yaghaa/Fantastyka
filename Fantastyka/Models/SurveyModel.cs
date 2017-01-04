@@ -14,6 +14,9 @@ namespace Fantastyka.Models
         [RegularExpression(@"\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*", ErrorMessage = "Niepoprawny format adresu e-mail")]
         public string Email { get; set; }
 
+        [Compare("Email", ErrorMessage = "Adresy Email nie są zgodne")]
+        public string ConfirmEmail { get; set; }
+
         [Required(ErrorMessage = "Pole Jest Wymagane")]
         public string Author { get; set; }
 
@@ -33,7 +36,7 @@ namespace Fantastyka.Models
 
         public DateTime PurchaseDate { get; set; }
 
-        [IsDateAfterAttribute("PurchaseDate")]
+        [IsDateAfter("PurchaseDate", ErrorMessage = "Data przeczytania nie może być wcześniejsza niż data zakupu")]
         public DateTime ReadedDate { get; set; }
     
         public bool  Hidden { get; set; }
