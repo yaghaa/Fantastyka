@@ -1,0 +1,51 @@
+﻿@model Fantastyka2.Models.Book
+@{
+    ViewBag.Title = "Dodaj Książkę";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="header">
+    <h2>@ViewBag.Title.</h2>
+</div>
+@using (Html.BeginForm("Post", "AddBook", FormMethod.Post))
+{
+    <div class="article">
+        <div class="form-control">
+            @Html.LabelFor(x => x.Title, new {@class = "col-sm-3"})
+            @Html.TextBoxFor(x => x.Title, new { @class = "col-sm-9" })
+        </div>
+       @Html.ValidationMessageFor(x => x.Title)
+        <div class="form-control">
+            <div>
+                @Html.LabelFor(x => x.Author, new {@class = "col-sm-3"})
+                @Html.TextBoxFor(x => x.Author, new {@class = "col-sm-9"})
+            </div>
+        </div>
+        @Html.ValidationMessageFor(x => x.Author)
+        <div class="form-control">
+            <div>
+                @Html.LabelFor(x => x.Publisher, new {@class = "col-sm-3"})
+                @Html.TextBoxFor(x => x.Publisher, new {@class = "col-sm-9"})
+            </div>
+        </div>
+        @Html.ValidationMessageFor(x => x.Publisher)
+        <div class="form-control">
+            <div>
+                @Html.LabelFor(x => x.Category, new {@class = "col-sm-3"})
+                @Html.TextBoxFor(x => x.Category, new {@class = "col-sm-9"})
+            </div>
+        </div>
+        @Html.ValidationMessageFor(x => x.Category)
+        <div class="form-control">
+            <div>
+                @Html.LabelFor(x => x.Price, new {@class = "col-sm-3"})
+                @Html.TextBoxFor(x => x.Price, new {@class = "col-sm-9", type = "number", step = "0.01"})
+            </div>
+        </div>
+        @Html.ValidationMessageFor(x => x.Title)
+
+        <div>
+            <input type="submit" class="btn btn-default" value="Dodaj książkę">
+        </div>
+    </div>
+}

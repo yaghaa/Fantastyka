@@ -1,0 +1,36 @@
+﻿@using System.IdentityModel.Tokens
+@using Fantastyka2.Models
+@model List<Fantastyka2.Models.ShoppingCartModel>
+@{
+    ViewBag.Title = "Koszyk";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div id="header">
+    <h2>@ViewBag.Title.</h2>
+</div>
+<div class="article">
+    
+    
+
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th>Tytul</th>
+            <th>Cena</th>
+            <th>Ilosc</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in @Model)
+        {
+            <tr>
+                <td>@item.Book.Title</td>
+                <td>@item.Book.Price</td>
+                <td>@item.Amount</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>

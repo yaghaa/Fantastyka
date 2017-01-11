@@ -1,0 +1,70 @@
+﻿@model  Fantastyka2.Models.BooksViewModel
+
+@{
+    ViewBag.Title = "Ksiazki";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="header">
+    <h2>@ViewBag.Title.</h2>
+</div>
+<div class="article">
+    @using (Html.BeginForm("Books", "Books", FormMethod.Post))
+    {
+        <div>
+            @{
+                var categories = Model.Books.Select(x => x.Category).Distinct().ToList();
+                categories.Insert(0, "Nie wybrano");
+                @Html.DropDownListFor(x => x.Category, new SelectList(categories), new {id = "category", onchange = "javascript:cascadingdropdown()"})
+            }
+        </div>
+        <div id="checkboxes">
+            @foreach (var item in Model.Books)
+            {
+                <div>
+                    <input type="checkbox" name="SelectedSources" value="@item.Id">@item.Title
+                </div>
+            }
+        </div>
+
+        <input type="submit" class="btn btn-default" value="Dodaj książkę" action="POST"/>
+    }
+
+
+</div>
+
+<script>
+    function cascadingdropdown() {
+        var category = $("#category").val();
+        var urlemp = '@Url.Action("GetBooksForCategory")';
+        var select = $('#checkboxes');
+        $.ajax({
+            type: "POST",
+            url: urlemp,
+            data: { category: category },
+            success: function (returndata) {
+                if (returndata.ok) {
+                    select.empty();
+
+                    $.each(returndata.data, function (index, itemData) {
+
+                        select.append($("<div>"));
+                        select.append($('<input type="checkbox">').val(itemData.Id).html(itemData.Title));
+                        select.append(itemData.Title);
+                        select.append($("</div>"));
+
+                    });
+                    select.show();
+                }
+                else {
+                    window.alert(' error : ' + returndata.message);
+                }
+
+            }
+        }
+        );
+
+
+
+    }
+</script>
