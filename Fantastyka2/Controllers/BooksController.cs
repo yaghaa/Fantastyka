@@ -19,15 +19,22 @@ namespace Fantastyka2.Controllers
             booksViewMoel.Books = repo.GetAllBooks();
             return View(booksViewMoel);
         }
+
         [HttpPost]
         public ActionResult Books(BooksViewModel model)
         {
+
             var request = Request.Form["SelectedSources"];
-            var checkedIds = request.Split(',').ToList();
-            var repo = new FantasyRepository();
-            repo.AddToCart(checkedIds,User.Identity.GetUserId());
+            if (request != null)
+            {
+                var checkedIds = request.Split(',').ToList();
+                var repo = new FantasyRepository();
+                repo.AddToCart(checkedIds, User.Identity.GetUserId());
+            }
+            
             return Books();
         }
+
         [HttpPost]
         public JsonResult GetBooksForCategory(string category)
         {
