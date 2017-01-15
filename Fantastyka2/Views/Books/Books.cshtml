@@ -22,12 +22,15 @@
             @foreach (var item in Model.Books)
             {
                 <div>
-                    <input type="checkbox" name="SelectedSources" value="@item.Id">@item.Title
+                    <input type="checkbox" name="SelectedSources" value="@item.Id">@item.DisplayName
                 </div>
             }
         </div>
 
-        <input type="submit" class="btn btn-default" value="Dodaj książkę" action="POST"/>
+        <input type="submit" class="btn btn-default" value="Dodaj książkę" action="POST" @if (!User.Identity.IsAuthenticated)
+                                                                                         {
+                                                                                             @:disabled = ""
+                                                                                         }) />
     }
 
 
@@ -49,8 +52,8 @@
                     $.each(returndata.data, function (index, itemData) {
 
                         select.append($("<div>"));
-                        select.append($('<input type="checkbox">').val(itemData.Id).html(itemData.Title));
-                        select.append(itemData.Title);
+                        select.append($('<input type="checkbox">').val(itemData.Id).html(itemData.toString()));
+                        select.append(itemData.DisplayName);
                         select.append($("</div>"));
 
                     });

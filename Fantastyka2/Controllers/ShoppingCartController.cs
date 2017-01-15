@@ -15,8 +15,15 @@ namespace Fantastyka2.Controllers
         public ActionResult Index()
         {
             var repository = new FantasyRepository();
-            var result = repository.GetShoppingCartItems(User.Identity.GetUserId()); 
+            var result = repository.GetShoppingCartItems(User.Identity.GetUserId());
             return View(result);
+        }
+        [HttpPost]
+        public ActionResult Post()
+        {
+            var repository = new FantasyRepository();
+            repository.ClearCart(User.Identity.GetUserId());
+            return Index();
         }
     }
 }

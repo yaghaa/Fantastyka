@@ -11,29 +11,75 @@
     <h2>@ViewBag.Title.</h2>
 </div>
 <div class="article">
-    
-    
+
+
     @if (@Model.Count > 0)
     {
         <table class="table table-hover">
             <thead>
             <tr>
                 <th>Tytul</th>
+                <th>Autor</th>
+                <th>Wydawca</th>
+                <th>Gatunek</th>
                 <th>Cena</th>
                 <th>Ilosc</th>
             </tr>
             </thead>
             <tbody>
+            @{
+                double sum = 0.0;
+            }
+
             @foreach (var item in @Model)
             {
                 <tr>
                     <td>@item.Book.Title</td>
+                    <td>@item.Book.Author</td>
+                    <td>@item.Book.Publisher</td>
+                    <td>@item.Book.Category</td>
                     <td>@item.Book.Price</td>
                     <td>@item.Amount</td>
                 </tr>
+                {
+                    sum += item.Book.Price*item.Amount;
+                }
             }
+
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td id="suma">@sum</td>
+                <td></td>
+            </tr>
+
             </tbody>
         </table>
+        <div align="right">
+            @Html.DropDownList("OpcjeDostawy", new List<SelectListItem>
+            {
+                new SelectListItem() {Text = "kurier", Value = "kurier"},
+                new SelectListItem() {Text = "poczta", Value = "poczta"},
+                new SelectListItem() {Text = "odbior osobisty", Value = "odbior osobisty"},
+            }, "Dostawa", new {id = "dostawa"})
+        </div>
+        <div align="right">
+            @Html.DropDownList("Płatość", new List<SelectListItem>
+            {
+                new SelectListItem() {Text = "przelew", Value = "przelew"},
+                new SelectListItem() {Text = "karta", Value = "karta"},
+                new SelectListItem() {Text = "gotówka", Value = "gotówka"},
+            }, "Płatność", new {id = "platnosc"})
+        </div>
+
+        @Html.BeginForm("Post", "ShoppingCart", FormMethod.Post)
+        {
+            <div align="right">
+                <input id="przycisk" type="submit" class="btn btn-default" value="Zrealizuj zamówienie"/>
+            </div>
+        }
     }
     else
     {
@@ -42,3 +88,21 @@
 
 
 </div>
+@Scripts.Render("~/bundles/jquery")
+<script type="text/javascript">
+
+    $("#przycisk")
+        .on("click",
+            function() {
+                var value = $("#dostawa").val();
+                var value1 = $("#platnosc").val();
+                var value2 = $("#suma").text();
+                alert("Zamówienie zostało przekazane do realizacji płatność:" +
+                    value1 +
+                    " dostawa:" +
+                    value +
+                    " wartość zamówienia" +
+                    value2);
+            });
+
+</script>

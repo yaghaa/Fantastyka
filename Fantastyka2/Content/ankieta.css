@@ -14,3 +14,22 @@
 #cover img.top:hover
 { opacity:0; }	
 
+
+.myfield-validation-error
+{
+    content: "";
+    display: inline-block;
+    height: 16px;
+    width: 16px;
+    margin-right: 4px;
+    background-image:url(../../Images/Close-2-icon.png);
+}
+.myfield-validation-valid
+{
+    content: "";
+    display: inline-block;
+    height: 16px;
+    width: 16px;
+    margin-right: 4px;
+    background-image:url(../../Images/Ok-icon.png);
+}

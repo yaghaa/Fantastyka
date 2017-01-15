@@ -178,5 +178,23 @@ namespace Fantastyka2.Repositories
 
             }
         }
+
+        public void ClearCart(string getUserId)
+        {
+            string query = @"delete from ShoppingCart where clientId =@clientId";
+
+            using (var connection = new SqlConnection(_connectionString))
+            using (SqlCommand cmd = new SqlCommand(query, connection))
+            {
+                var param = new SqlParameter();
+                param.ParameterName = "@clientId";
+                param.Value = getUserId;
+
+                cmd.Parameters.Add(param);
+                connection.Open();
+                cmd.ExecuteNonQuery();
+                connection.Close();
+            }
+        }
     }
 }

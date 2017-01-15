@@ -24,5 +24,12 @@ namespace Fantastyka2.Models
         [Required]
         [Display(Name = "Cena")]
         public double Price { get; set; }
+
+        public string DisplayName  => ToString();
+
+        public override string ToString()
+        {
+            return Title + " " + Author + " " + Publisher + " " + Category + " " + Price;
+        }
     }
 }

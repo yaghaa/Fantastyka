@@ -21,40 +21,61 @@
 
         @using (Html.BeginForm("Survey", "Survey"))
         {
-            <div>
-                @Html.Label("Imię")
-                @Html.TextBoxFor(x => x.Name)
-                @Html.ValidationMessageFor(x => x.Name,"", new { @style = "color:red" })
-            </div>
-            <div>
-                @Html.Label("E-Mail")
-                @Html.TextBoxFor(x => x.Email)
-                @Html.ValidationMessageFor(x => x.Email , "", new { @style = "color:red" })
-            </div>
-            <div>
-                @Html.Label("Confirm E-Mail")
-                @Html.TextBoxFor(x => x.ConfirmEmail)
-                @Html.ValidationMessageFor(x => x.ConfirmEmail, "", new { @style = "color:red" })
+            <div class="form-group">
+                @Html.Label("Imię", new { @class = "col-md-2 control-label" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Name)
+
+                </div>
             </div>
 
-            <div>
-                @Html.Label("Autor")
-                @Html.TextBoxFor(x => x.Author)
-                @Html.ValidationMessageFor(x => x.Author, "", new { @style = "color:red" })
+            <div class="form-group">
+                @Html.Label("E-Mail", new { @class = "col-md-2 control-label" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Email)
+
+                </div>
             </div>
 
-            <div>
-                @Html.Label("Tytył książki")
-                @Html.TextBoxFor(x => x.Title)
-                @Html.ValidationMessageFor(x => x.Title, "", new { @style = "color:red" })
+            <div class="form-group">
+                @Html.Label("Potwierdz E-Mail", new { @class = "col-md-2 control-label" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.ConfirmEmail, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.ConfirmEmail)
+
+                </div>
             </div>
 
-            <div>
-                @Html.Label("Wydawca")
-                @Html.TextBoxFor(x => x.Publisher)
-                @Html.ValidationMessageFor(x => x.Publisher, "", new { @style = "color:red" })
+            <div class="form-group">
+                @Html.Label("Autor", new { @class = "col-md-2 control-label" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.Author, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Author)
+
+                </div>
             </div>
 
+            <div class="form-group">
+                @Html.Label("Tytuł książki", new { @class = "col-md-2 control-label" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.Title, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Title)
+
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.Label("Wydawca", new { @class = "col-md-2 control-label" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.Publisher, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Publisher)
+
+                </div>
+            </div>
+
+            
             <label class="fixed" for="ocenaK">
                 <strong>Jak oceniasz książkę: </strong>
             </label>
@@ -78,23 +99,33 @@
             @Html.EnumDropDownListFor(x => x.Readed)
             @Html.ValidationMessageFor(x => x.Readed , "", new { @style = "color:red" })
 
-            <div>
-                @Html.Label("Ile razy przeczytałeś/aś tą książkę?")
-                @Html.TextBoxFor(x => x.TimesReaded)
-                @Html.ValidationMessageFor(x => x.TimesReaded, "", new { @style = "color:red" })
+            <div class="form-group">
+                @Html.Label("Ile przeczytań", new { @class = "col-md-2 control-label" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.TimesReaded, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.TimesReaded)
+
+                </div>
             </div>
 
-            <div>
-                @Html.Label("Data zakupu")
-                @Html.TextBoxFor(x => x.PurchaseDate, new { @class = "datefield", type = "date" })
-                @Html.ValidationMessageFor(x => x.PurchaseDate, "", new { @style = "color:red" })
+            @*<div class="form-group">
+                @Html.Label("Data zakupu", new { @class = "col-md-2 control-label" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.PurchaseDate, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.PurchaseDate)
+
+                </div>
             </div>
 
-            <div>
-                @Html.Label("Data przeczytania")
-                @Html.TextBoxFor(x => x.ReadedDate, new { @class = "datefield", type = "date" })
-                @Html.ValidationMessageFor(x => x.ReadedDate, "", new { @style = "color:red" })
-            </div>
+            <div class="form-group">
+                @Html.Label("Data przeczytania", new { @class = "col-md-2 control-label" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.ReadedDate, new { @class = "form-control", id = "datetimepicker4" })
+                    @Html.ValidationMessageFor(m => m.ReadedDate)
+
+                </div>
+            </div>*@
+            
 
             <p>
                 <input id="submit" type="submit" value="Wyślij" action="POST">
@@ -122,3 +153,22 @@
     </div>
 </div>
 </body>
+@Scripts.Render("~/bundles/jqueryval")
+@*@Scripts.Render("~/bundles/jquery.datetimepicker")*@
+<script>
+
+$("#Name").tooltipValidation({placement:"right"});
+$("#Email").tooltipValidation({ placement: "right" });
+$("#ConfirmEmail").tooltipValidation({ placement: "right" });
+$("#Author").tooltipValidation({placement:"right"});
+$("#Title").tooltipValidation({ placement: "right" });
+$("#Publisher").tooltipValidation({placement:"right"});
+$("#Rating").tooltipValidation({ placement: "right" });
+$("#TimesReaded").tooltipValidation({ placement: "right" });
+//$("#PurchaseDate").tooltipValidation({ placement: "right" });
+//$("#ReadedDate").tooltipValidation({ placement: "right" });
+
+//$(function () {
+//    $('#datetimepicker4').datetimepicker();
+//});
+</script>
